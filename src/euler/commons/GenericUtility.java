@@ -62,8 +62,8 @@ public class GenericUtility {
 
 	public static boolean isPerfectSquare(int n) {
 		
-		for (int i = n; i > 0; i--) {
-			int tempSquare = n * n;
+		for (int i = n/2; i > 0; i--) {
+			int tempSquare = i * i;
 			
 			if (tempSquare == n) {
 				return true;
@@ -75,12 +75,22 @@ public class GenericUtility {
 	
 	public static boolean isPythTriple(int a, int b, int c) {
 		
-		boolean check = (a * a) + (b * b) == (c * c);
+		boolean check = raiseToThePower(a, 2) + raiseToThePower(b, 2) == raiseToThePower(c, 2);
 		
 		if (check) {
 			return true;
 		}
 		
 		return false;
+	}
+	
+	public static long raiseToThePower(long base, long exp) {
+		long a = 1;
+		
+		for (long i = 0; i < exp; i++) {
+			a *= base;
+		}
+		
+		return a;
 	}
 }
