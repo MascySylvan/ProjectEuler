@@ -2,7 +2,7 @@ package euler.commons;
 
 import java.util.Random;
 
-public class saasas {
+public class sandbox {
 	public static void main(String[] args) throws Exception {
         Random random = new Random();
         for (int i = 0; i < 50; i++) {
