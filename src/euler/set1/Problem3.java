@@ -13,7 +13,7 @@ public class Problem3 {
 //		What is the largest prime factor of the number 600,851,475,143 ?
 		
 		long n = Long.parseLong("600851475143");
-		List<Long> factors = GenericUtility.getFactors(n, true);
+		List<Long> factors = GenericUtility.getPrimeFactors(n);
 		
 		long largestPrime = n;
 		

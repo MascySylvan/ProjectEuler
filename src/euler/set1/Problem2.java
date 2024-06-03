@@ -16,17 +16,17 @@ public class Problem2 {
 //		By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 //		find the sum of the even-valued terms.
 		
-		List<Integer> fibSeq = new LinkedList<Integer>();
+		List<Integer> fibSeq = new LinkedList<>();
 		
 		//generate fibSeq
-		fibSeq.add(new Integer(1) );
-		fibSeq.add(new Integer(2) );
+		fibSeq.add(1);
+		fibSeq.add(2);
 		
 		do {
 			int prev1 = fibSeq.get(fibSeq.size() - 1).intValue();
 			int prev2 = fibSeq.get(fibSeq.size() - 2).intValue();
 
-			fibSeq.add(new Integer(prev1 + prev2) );
+			fibSeq.add(prev1 + prev2);
 			
 		} while (fibSeq.get(fibSeq.size() - 1).intValue() <= 4000000 );
 		

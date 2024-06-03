@@ -1,63 +1,51 @@
 package euler.commons;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 
 public class GenericUtility {
 	
 	public static boolean isPrime(long n) {
-		
-		if (n > 1) {
-			boolean primeCheck = true;
-			long firstCheckingTerm = (n - (n % 2) ) / 2;
-			
-			for (long i = firstCheckingTerm; i > 1; i--) {
-				if (n % i == 0) {
-					primeCheck = false;
-					break;
-				}
-			}
-			
-			return primeCheck; 
-		}
-		
-		return false;
+		if (n <= 1) {
+            return false;
+        }
+        for (long i = 2; i <= n / 2; i++) {
+            if ((n % i) == 0) {
+                return false;
+            }
+        }
+        return true;
 	}
-	
-	public static List<Long> getFactors(long n, boolean primesOnly) {
-		List<Long> factors = new LinkedList<Long>();
-		
-		if (n > 1) {
-			long firstCheckingTerm = (n - (n % 2) ) / 2;
-			
-			List<Long> factorsTemp = new LinkedList<Long>();
-			
-			long x = firstCheckingTerm;
-			while (x > 1) {
-				System.out.println("Current Value: " + x);
-				if (n % x == 0) {
-					factorsTemp.add(new Long(x) );
-				}
-				
-				if ( (x - (x % 10) ) / 10 > 1000000) {
-					x = x - (x - (x % 10) ) / 10;
-				} else {
-					x--;
-				}
-			}
-			
-			if (primesOnly) {
-				for (int i = 0; i < factorsTemp.size(); i++) {
-					if (isPrime(factorsTemp.get(i).longValue() ) ) {
-						factors.add(factorsTemp.get(i) );
-					}
-				}
-			} else {
-				return factorsTemp;
+
+	public static List<Long> getFactors(long n) {
+		List<Long> factors = new ArrayList<>();
+        for (long i = 1; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                factors.add(i);
+                factors.add(n / i);
+            }
+        }
+
+		return factors;
+	}
+
+	public static List<Long> getUniqueFactors(long n) {
+		return new LinkedList<>(new LinkedHashSet<>(getFactors(n)));
+	}
+
+	public static List<Long> getPrimeFactors(long n) {
+		List<Long> primeFactors = new LinkedList<>();
+		List<Long> factors = getUniqueFactors(n);
+
+		for (int i = 0; i < factors.size(); i++) {
+			if (isPrime(factors.get(i))) {
+				primeFactors.add(factors.get(i));
 			}
 		}
-		
-		return factors;
+
+		return primeFactors;
 	}
 
 	public static boolean isPerfectSquare(int n) {
@@ -74,14 +62,7 @@ public class GenericUtility {
 	}
 	
 	public static boolean isPythTriple(int a, int b, int c) {
-		
-		boolean check = raiseToThePower(a, 2) + raiseToThePower(b, 2) == raiseToThePower(c, 2);
-		
-		if (check) {
-			return true;
-		}
-		
-		return false;
+		return raiseToThePower(a, 2) + raiseToThePower(b, 2) == raiseToThePower(c, 2);
 	}
 	
 	public static long raiseToThePower(long base, long exp) {
